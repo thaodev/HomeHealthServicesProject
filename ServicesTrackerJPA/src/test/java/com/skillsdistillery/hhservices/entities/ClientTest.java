@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DisciplineTest {
+class ClientTest {
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
@@ -38,10 +38,10 @@ class DisciplineTest {
 	}
 
 	@Test
-	void test_Discipline_entity_mapping() {
-		Discipline disc = em.find(Discipline.class, 1);
-		assertNotNull(disc);
-		assertEquals("SN", disc.getName());
+	void test_Client_entity_mapping() {
+		Client client = em.find(Client.class, 1);
+		assertNotNull(client);
+		//assertEquals("Peter Markel", client.getName());
 	}
 
 }

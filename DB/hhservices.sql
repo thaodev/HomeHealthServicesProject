@@ -53,18 +53,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user` ;
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_type` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `line_of_business`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `line_of_business` ;
@@ -72,6 +60,18 @@ DROP TABLE IF EXISTS `line_of_business` ;
 CREATE TABLE IF NOT EXISTS `line_of_business` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_type` ;
+
+CREATE TABLE IF NOT EXISTS `user_type` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -86,19 +86,21 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
   `address` VARCHAR(45) NULL,
-  `user_id` INT NOT NULL,
   `line_of_business_id` INT NOT NULL,
+  `username` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `user_type_id` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_employee_user1_idx` (`user_id` ASC),
   INDEX `fk_employee_line_of_business1_idx` (`line_of_business_id` ASC),
-  CONSTRAINT `fk_employee_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_employee_user_type1_idx` (`user_type_id` ASC),
   CONSTRAINT `fk_employee_line_of_business1`
     FOREIGN KEY (`line_of_business_id`)
     REFERENCES `line_of_business` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employee_user_type1`
+    FOREIGN KEY (`user_type_id`)
+    REFERENCES `user_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -219,19 +221,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `homehealthtracker`;
-INSERT INTO `user` (`id`, `user_type`) VALUES (1, 'regular employee');
-INSERT INTO `user` (`id`, `user_type`) VALUES (2, 'schedule manager');
-INSERT INTO `user` (`id`, `user_type`) VALUES (3, 'biller');
-INSERT INTO `user` (`id`, `user_type`) VALUES (4, 'admin');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `line_of_business`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -244,11 +233,27 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `user_type`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `homehealthtracker`;
+INSERT INTO `user_type` (`id`, `type`) VALUES (1, 'regular employee');
+INSERT INTO `user_type` (`id`, `type`) VALUES (2, 'schedule manager');
+INSERT INTO `user_type` (`id`, `type`) VALUES (3, 'biller');
+INSERT INTO `user_type` (`id`, `type`) VALUES (4, 'admin');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `employee`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `homehealthtracker`;
-INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `user_id`, `line_of_business_id`) VALUES (1, 'Mary', 'Chappline', '11445 Fullerton Drive', 1, 1);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `line_of_business_id`, `username`, `password`, `user_type_id`) VALUES (1, 'Mary', 'Chappline', '11445 Fullerton Drive', 1, 'marych', '1234', 1);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `line_of_business_id`, `username`, `password`, `user_type_id`) VALUES (2, 'Bob', 'Miller', '112 Wokshire', 2, 'BobMil', '1234', 2);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `line_of_business_id`, `username`, `password`, `user_type_id`) VALUES (3, 'Rachel', 'Green', '145 Secret Dr', 3, 'RachelGr', '1234', 3);
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `address`, `line_of_business_id`, `username`, `password`, `user_type_id`) VALUES (4, 'Phoebe', 'Blue', '356 Tommy Cir', 4, 'admin', '1234', 4);
 
 COMMIT;
 

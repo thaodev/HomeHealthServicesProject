@@ -12,7 +12,7 @@
     <class>com.skillsdistillery.hhservices.entities.LOB</class>
     <class>com.skillsdistillery.hhservices.entities.Payroll</class>
     <class>com.skillsdistillery.hhservices.entities.Schedule</class>
-    <class>com.skillsdistillery.hhservices.entities.User</class>
+    <class>com.skillsdistillery.hhservices.entities.UserType</class>
 
  
     <!--entities -->

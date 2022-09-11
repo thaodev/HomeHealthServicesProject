@@ -1,5 +1,6 @@
 package com.skillsdistillery.hhservices.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,15 +15,17 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Column(name="last_name")
 	private String lastName;
 	
 	private String address;
 	
 	@OneToOne
-	@JoinColumn(name="user_id")
-	private User user;
+	@JoinColumn(name="user_type_id")
+	private UserType userType;
 	
 	@OneToOne
 	@JoinColumn(name="line_of_business_id")
@@ -40,7 +43,8 @@ public class Employee {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -65,12 +69,12 @@ public class Employee {
 		this.address = address;
 	}
 
-	public User getUser() {
-		return user;
+	public UserType getUserType() {
+		return userType;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public LOB getDepartment() {
@@ -84,7 +88,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", user=" + user + ", department=" + department + "]";
+				+ ", userType=" + userType + ", department=" + department + "]";
 	}
 	
 	

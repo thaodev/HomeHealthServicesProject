@@ -17,6 +17,7 @@ public class Client {
 	
 	private String name;
 	
+	@Column(name="date_of_birth")
 	private LocalDate dob;
 	
 	private String street;
