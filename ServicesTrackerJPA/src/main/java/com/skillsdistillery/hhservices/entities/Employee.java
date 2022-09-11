@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employee {
@@ -17,6 +19,16 @@ public class Employee {
 	private String lastName;
 	
 	private String address;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name="line_of_business_id")
+	private LOB department;
+	
+	
 
 	public Employee() {
 	}
@@ -51,6 +63,28 @@ public class Employee {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LOB getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(LOB department) {
+		this.department = department;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+				+ ", user=" + user + ", department=" + department + "]";
 	}
 	
 	

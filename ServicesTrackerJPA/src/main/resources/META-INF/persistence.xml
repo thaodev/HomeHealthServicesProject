@@ -6,7 +6,13 @@
     </provider>
     
     <!--entities -->
+    <class>com.skillsdistillery.hhservices.entities.Client</class>
     <class>com.skillsdistillery.hhservices.entities.Discipline</class>
+    <class>com.skillsdistillery.hhservices.entities.Employee</class>
+    <class>com.skillsdistillery.hhservices.entities.LOB</class>
+    <class>com.skillsdistillery.hhservices.entities.Payroll</class>
+    <class>com.skillsdistillery.hhservices.entities.Schedule</class>
+    <class>com.skillsdistillery.hhservices.entities.User</class>
 
  
     <!--entities -->

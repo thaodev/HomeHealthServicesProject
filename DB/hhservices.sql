@@ -132,27 +132,22 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `bill_amount` DECIMAL(5,2) NULL,
   `payroll_amount` DECIMAL(5,2) NULL,
   `payroll_id` INT NOT NULL,
-  `employee_id` INT NOT NULL,
   `schedule_status` VARCHAR(45) NULL,
   `bill_status` VARCHAR(45) NULL,
   `client_id` INT NOT NULL,
   `payroll_status` VARCHAR(45) NULL,
   `line_of_business_id` INT NOT NULL,
   `discipline_id` INT NOT NULL,
+  `employee_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_schedule_payroll_idx` (`payroll_id` ASC),
-  INDEX `fk_schedule_employee1_idx` (`employee_id` ASC),
   INDEX `fk_schedule_client1_idx` (`client_id` ASC),
   INDEX `fk_schedule_line_of_business1_idx` (`line_of_business_id` ASC),
   INDEX `fk_schedule_discipline1_idx` (`discipline_id` ASC),
+  INDEX `fk_schedule_employee1_idx` (`employee_id` ASC),
   CONSTRAINT `fk_schedule_payroll`
     FOREIGN KEY (`payroll_id`)
     REFERENCES `payroll` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_schedule_employee1`
-    FOREIGN KEY (`employee_id`)
-    REFERENCES `employee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_schedule_client1`
@@ -168,6 +163,11 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   CONSTRAINT `fk_schedule_discipline1`
     FOREIGN KEY (`discipline_id`)
     REFERENCES `discipline` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_schedule_employee1`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `employee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -268,7 +268,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `homehealthtracker`;
-INSERT INTO `schedule` (`id`, `date`, `bill_amount`, `payroll_amount`, `payroll_id`, `employee_id`, `schedule_status`, `bill_status`, `client_id`, `payroll_status`, `line_of_business_id`, `discipline_id`) VALUES (1, '2022-01-01', 200, 150, 1, 1, 'planned', 'not yet', 1, 'not yet', 2, 1);
+INSERT INTO `schedule` (`id`, `date`, `bill_amount`, `payroll_amount`, `payroll_id`, `schedule_status`, `bill_status`, `client_id`, `payroll_status`, `line_of_business_id`, `discipline_id`, `employee_id`) VALUES (1, '2022-01-01', 200, 150, 1, 'planned', 'not yet', 1, 'not yet', 2, 1, 1);
 
 COMMIT;
 
