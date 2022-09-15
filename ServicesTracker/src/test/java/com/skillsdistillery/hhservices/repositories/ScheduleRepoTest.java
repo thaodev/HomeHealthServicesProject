@@ -1,4 +1,4 @@
-package com.skilldistillery.hhservices.repositories;
+package com.skillsdistillery.hhservices.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
